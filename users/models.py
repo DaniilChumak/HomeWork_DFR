@@ -5,9 +5,7 @@ from django.db import models
 class User(AbstractUser):
     username = None
     email = models.EmailField(
-        unique=True,
-        verbose_name="Почта",
-        help_text="Введите вашу электронную почту"
+        unique=True, verbose_name="Почта", help_text="Введите вашу электронную почту"
     )
     phone = models.CharField(
         max_length=20,
@@ -37,4 +35,6 @@ class User(AbstractUser):
     class Meta:
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"
+
+
 f
