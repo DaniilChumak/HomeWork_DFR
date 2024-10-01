@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Course(models.Model):
-    title = models.CharField(
+    title_course = models.CharField(
         max_length=100,
         verbose_name="Название курса",
         help_text="Введите название курса",
@@ -14,7 +14,7 @@ class Course(models.Model):
         verbose_name="Картинка",
         help_text="Загрузите картинку для превью курса",
     )
-    description = models.TextField(
+    description_course = models.TextField(
         verbose_name="Описание курса",
         help_text="Введите описание курса",
     )
@@ -25,12 +25,12 @@ class Course(models.Model):
 
 
 class Lesson(models.Model):
-    title = models.CharField(
+    title_lesson = models.CharField(
         max_length=100,
         verbose_name="Название урока",
         help_text="Введите название урока",
     )
-    description = models.TextField(
+    description_lesson = models.TextField(
         verbose_name="Описание урока",
         help_text="Введите описание урока",
     )
