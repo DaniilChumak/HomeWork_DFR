@@ -24,7 +24,6 @@ class Course(models.Model):
         verbose_name_plural = "Курсы"
 
 
-
 class Lesson(models.Model):
     title = models.CharField(
         max_length=100,
@@ -37,7 +36,7 @@ class Lesson(models.Model):
     )
     course = models.ForeignKey(
         Course,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         blank=True,
         null=True,
         verbose_name="Курс",
