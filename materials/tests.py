@@ -101,9 +101,8 @@ class SubscriptionTestCase(APITestCase):
 
     def setUp(self):
         self.user = User.objects.create(email='admin@example.com')
-        self.course = Course.objects.create(title='Python/git', description='Введение в git.hub', owner=self.user)
-        self.lesson = Lesson.objects.create(title='Git', description='Знакомство с git', course=self.course,
-                                            owner=self.user)
+        self.course = Course.objects.create(title='Python/git', description='Введение в git.hub')
+        self.lesson = Lesson.objects.create(title='Git', description='Знакомство с git', course=self.course)
         self.client.force_authenticate(user=self.user)
 
     def test_subscription_create(self):
