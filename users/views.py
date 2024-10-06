@@ -1,4 +1,3 @@
-
 from rest_framework import generics, viewsets
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -14,6 +13,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class UserCreateAPIView(generics.CreateAPIView):
     """Опция создания нового юзера"""
+
     serializer_class = UserSerializer
     queryset = User.objects.all()
     """Настройка для разрешения создавать нового юзера всем"""
@@ -53,5 +53,5 @@ class PaymentListAPIView(generics.ListAPIView):
     queryset = Payment.objects.all()
     """Настроили фильтрацию"""
     filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['paid_lesson', 'paid_course', 'payment_method']
-    ordering_fields = ['-date_of_payment']
+    search_fields = ["paid_lesson", "paid_course", "payment_method"]
+    ordering_fields = ["-date_of_payment"]
