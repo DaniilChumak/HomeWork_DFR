@@ -1,4 +1,4 @@
-from materials.models import Course, Lesson
+from materials.models import Course, Lesson, Subscription
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from materials.validators import LinkToVideoValidator
 
@@ -27,3 +27,9 @@ class CourseDetailSerializer(ModelSerializer):
     class Meta:
         model = Course
         fields = ("title", "description", "lesson_count", "lessons")
+
+
+class SubscriptionSerializer(ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = ("sign_of_subscription",)
