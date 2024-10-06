@@ -11,12 +11,12 @@ class LessonTestCase(APITestCase):
     def setUp(self):
         self.user = User.objects.create(email='admin@example.com')
         self.course = Course.objects.create(
-            title='Python/git',
-            description='Введение в git.hub'
+            title='Python/DFR',
+            description='Валидаторы, пагинация и тесты'
         )
         self.lesson = Lesson.objects.create(
-            title='Git',
-            description='Знакомство с git',
+            title='DFR',
+            description='Знакомство с DFR',
             course=self.course
         )
         self.client.force_authenticate(user=self.user)
@@ -85,10 +85,9 @@ class LessonTestCase(APITestCase):
                     "id": self.lesson.pk,
                     "title": self.lesson.title,
                     "description": self.lesson.description,
-                    "lesson_preview": None,
-                    "url_video": None,
+                    "preview_image": None,
+                    "link_to_video": None,
                     "course": self.course.pk,
-                    "owner": self.user.pk
                 }]}
         self.assertEqual(
             response.status_code, status.HTTP_200_OK
