@@ -117,7 +117,7 @@ class SubscriptionTestCase(APITestCase):
             response.status_code, status.HTTP_200_OK
         )
         self.assertEqual(
-            data, {'message': 'подписка добавлена'}
+            data, {'message': 'Подписка добавлена'}
         )
 
     def test_subscription_delete(self):
@@ -133,5 +133,5 @@ class SubscriptionTestCase(APITestCase):
             response.status_code, status.HTTP_200_OK
         )
         self.assertEqual(
-            data, {'message': 'подписка удалена'}
+            data, {'message': 'Подписка удалена'}
         )
