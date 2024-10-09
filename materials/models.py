@@ -18,11 +18,21 @@ class Course(models.Model):
     description = models.TextField(
         verbose_name="Описание курса",
         help_text="Введите описание курса",
+    ),
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name="Владелец курса",
+        blank=True,
+        null=True,
     )
 
     class Meta:
         verbose_name = "Курс"
         verbose_name_plural = "Курсы"
+
+    def __str__(self):
+        return self.title
 
 
 class Lesson(models.Model):
