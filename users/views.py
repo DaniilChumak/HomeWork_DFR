@@ -3,7 +3,9 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from users.models import Payment, User
 from users.serializers import PaymentSerializer, UserSerializer
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView
+
+from users.services import create_stripe_product, create_stripe_price, create_stripe_session
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -48,10 +50,16 @@ class UserDeleteAPIView(generics.DestroyAPIView):
     queryset = User.objects.all()
 
 
-class PaymentListAPIView(generics.ListAPIView):
+class PaymentCreateAPIView(CreateAPIView):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
-    """Настроили фильтрацию"""
-    filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ["paid_lesson", "paid_course", "payment_method"]
-    ordering_fields = ["-date_of_payment"]
+
+    def perform_create(self, serializer):
+        payment = serializer.save(user=self.request.user)
+        stripe_product_id = create_stripe_product(payment)
+        price_id = create_stripe_price(payment, stripe_product_id)
+        session_id, payment_link = create_stripe_session(price_id)
+        payment.session_id = session_id
+        payment.link = payment_link
+        payment.save()
+
