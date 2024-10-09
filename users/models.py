@@ -65,12 +65,30 @@ class Payment(models.Model):
         verbose_name="Приобретенный урок",
         help_text="Выберите урок, который покупаете",
     )
+    cost = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Стоимость покупки"
+    )
+    CASH = "cash"
+    NON_CASH = "non_cash"
+    PAYMENT_METHOD = [(CASH, "cash"), (NON_CASH, "non_cash")]
     payment_method = models.CharField(
-        max_length=35,
-        verbose_name="Способ оплаты",
-        help_text="Выберите способ оплаты",
+        choices=PAYMENT_METHOD,
+        default=CASH,
+        verbose_name='Способ оплаты')
+    session_id = models.CharField(
+        max_length=255,
         blank=True,
         null=True,
+        verbose_name='Id сессии',
+        help_text='Укажите id сессии',
+    )
+    link = models.URLField(
+        max_length=400,
+        blank=True,
+        null=True,
+        verbose_name='Ссылка на оплату',
+        help_text='Укажите ссылку на оплату',
     )
 
     def __str__(self):
